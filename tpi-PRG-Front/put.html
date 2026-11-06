@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <title>TPI - PRG III</title>
+  </head>
+  <body>
+
+    <header>
+
+      <div class="header-content">
+
+        <div class="logo-container">
+          <img src="./img/logo.webp" alt="" />
+        </div>
+
+        <div class="nav-container">
+          <nav>
+            <ul class="nav-content">
+              <li><a href="index.html">Inicio</a></li>
+              <li><a href="get.html">Obtener</a></li>
+              <li><a href="post.html">Crear</a></li>
+              <li><a href="#">Modificar</a></li>
+              <li><a href="delete.html">Eliminar</a></li>
+            </ul>
+          </nav>
+        </div>
+
+      </div>
+
+    </header>
+
+    
+    <section class="form-section">
+
+        <div class="form-container">
+            
+            <div class="form-title">
+                <h2>Modificar Producto</h2>
+            </div>
+
+            <form id="form-put">
+
+                <label for="ProdId"></label>
+                <input type="number" name="ProdId" id="ProdId">
+
+                <div class="submit-container">
+                    <input type="submit" value="Enviar"></input>
+                </div>
+                
+            </form>
+
+            <div id="contenedor-producto"></div>
+
+        </div>
+        
+
+    </section>
+
+
+    <script>  
+      const formulario = document.getElementById("form-put");
+      const productContainer = document.getElementById("contenedor-producto");
+      const urlBase = "http://localhost:25565";
+
+      const obtenerProducto=()=>{
+
+        formulario.addEventListener("submit",async event=>{
+          event.preventDefault();
+
+          const id= event.target.ProdId.value.trim();
+
+          try {
+
+            let response = await fetch(`${urlBase}/api/products/${id}`)
+            response = await response.json();
+
+            let arrProducto = response.payload;
+            
+            renderizarProducto(arrProducto)
+          } catch (error) {
+            console.log("error al traer datos de la back: ",error);
+          }
+        })
+
+      }
+      
+      const renderizarProducto =(arrProducto)=>{
+
+        let html =``;
+
+        arrProducto.forEach(prod => {
+            html += `
+            <div class="card-producto">
+                <img class="img-product" src="${prod.image}" alt="">
+                <h4>${prod.name}</h4>
+                <p>ID: ${prod.id}</p>
+                <p class="card-price">$${prod.price}</p>
+                <button class="btn-modificar">Modificar</button>
+            </div>
+            `;
+        });
+
+        productContainer.innerHTML = html;
+
+        let btnModificar = document.querySelector(".btn-modificar");
+
+        btnModificar.addEventListener("click",()=>{
+          let confirmacion = confirm("Queres actualizar?");
+          if(!confirmacion){
+            alert("ok")
+          }
+          else{
+            mostrarFormActualizacion(arrProducto[0]);
+          }
+        })
+      }
+
+
+      const mostrarFormActualizacion=async(producto)=>{
+
+        let html =`
+            <form id="form-put-act">
+
+            <input type="hidden" name="id" value="${producto.id}">
+
+            <label for="categoryProd">Categoria</label>
+            <select name="category" id="categoryProd" required>
+                <option value="food">comida</option>
+                <option value="food">bebida</option>
+            </select>
+
+            <label for="image-prod">Imagen</label>
+            <input value=${producto.image} type="text" name="image" id="image-prod" required>
+
+            <label for="name-prod">Nombre</label>
+            <input value=${producto.name} type="text" name="name" id="name-prod" required>
+        
+            <label for="price-prod">Precio</label>
+            <input value=${producto.price} type="number" name="price" id="price-prod" required>
+        
+            <input type="submit" value="Modificar Producto">
+        </form>
+        `
+
+        productContainer.innerHTML = html;
+
+        let formPut = document.getElementById("form-put-act");
+
+        formPut.addEventListener("submit",async (event)=>{
+          actualizarProducto(event);
+        })
+
+      }
+
+
+      const actualizarProducto = async (event) => {
+
+        event.preventDefault();
+
+        const formData = new FormData(event.target);
+        const formObj = Object.fromEntries(formData.entries());
+        const dataJson = JSON.stringify(formObj);
+
+        try {
+
+          let response = await fetch(`${urlBase}/api/products`,{
+            method:"PUT",
+            headers: {"Content-Type":"application/json"},
+            body:dataJson
+          });
+
+          let dataBackend = await response.json();
+          alert(dataBackend.message)
+
+
+          productContainer.innerHTML = "";
+
+        } catch (error) {
+          console.log("error al mandar al back", error);
+        }
+      }
+
+      
+      obtenerProducto();
+    </script>
+
+  </body>
+</html>

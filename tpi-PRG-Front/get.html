@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/styles.css" />
+    <title>TPI - PRG III</title>
+  </head>
+  <body>
+
+    <header>
+
+      <div class="header-content">
+
+        <div class="logo-container">
+          <img src="./img/logo.webp" alt="" />
+        </div>
+
+        <div class="nav-container">
+          <nav>
+            <ul class="nav-content">
+              <li><a href="index.html">Inicio</a></li>
+              <li><a href="get.html">Obtener</a></li>
+              <li><a href="post.html">Crear</a></li>
+              <li><a href="put.html">Modificar</a></li>
+              <li><a href="delete.html">Eliminar</a></li>
+            </ul>
+          </nav>
+        </div>
+
+      </div>
+
+    </header>
+
+    
+    <section class="form-section">
+
+        <div class="form-container">
+            
+            <div class="form-title">
+                <h2>Consultar Producto</h2>
+            </div>
+
+            <form id="form-get">
+
+                <label for="ProdId"></label>
+                <input type="number" name="ProdId" id="ProdId">
+
+                <div class="submit-container">
+                    <input type="submit" value="Enviar"></input>
+                </div>
+
+            </form>
+            <div id="contenedor-producto"></div>
+        </div>
+        
+
+    </section>
+
+
+
+    <script>
+        const productContainer = document.getElementById("contenedor-producto");
+        const formulario = document.getElementById("form-get");
+        const urlBase = "http://localhost:25565";
+
+        const obtenerDatosForm= async()=>{
+
+            formulario.addEventListener("submit", async event =>{
+
+                event.preventDefault();
+                const id = event.target.ProdId.value.trim();
+                
+
+                //trycatch
+                let resultado = await fetch(`${urlBase}/api/products/${id}`)
+                resultado = await resultado.json();
+
+                const data = resultado.payload;
+                renderizarProducto(data);
+            })
+
+        }
+
+        const renderizarProducto=(array)=>{
+            console.log("ARRAY Q LLEGA DEL PAYLOAD",array);
+            let html =``;
+
+            array.forEach(prod => {
+                html += `
+                <div class="card-producto">
+                    <img class="img-product" src="${prod.image}" alt="">
+                    <h4>${prod.name}</h4>
+                    <p>ID: ${prod.id}</p>
+                    <p class="card-price">$${prod.price}</p>
+                </div>
+                `;
+            });
+
+            productContainer.innerHTML = html;
+        }
+
+        obtenerDatosForm();
+
+    </script>
+
+  </body>
+</html>

@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/styles.css" />
+    <title>TPI - PRG III</title>
+  </head>
+  <body>
+
+    <header>
+
+      <div class="header-content">
+
+        <div class="logo-container">
+          <img src="./img/logo.webp" alt="" />
+        </div>
+
+        <div class="nav-container">
+          <nav>
+            <ul class="nav-content">
+              <li><a href="index.html">Inicio</a></li>
+              <li><a href="get.html">Obtener</a></li>
+              <li><a href="post.html">Crear</a></li>
+              <li><a href="put.html">Modificar</a></li>
+              <li><a href="delete.html">Eliminar</a></li>
+            </ul>
+          </nav>
+        </div>
+
+      </div>
+
+    </header>
+
+    
+    <section class="form-section">
+
+        <div class="form-container">
+            
+            <div class="form-title">
+                <h2>Eliminar Producto</h2>
+            </div>
+
+            <form id="form-delete">
+
+                <label for="ProdId"></label>
+                <input type="number" name="ProdId" id="ProdId">
+
+                <div class="submit-container">
+                    <input type="submit" value="Enviar"></input>
+                </div>
+
+            </form>
+            <div id="contenedor-producto"></div>
+        </div>
+        
+
+    </section>
+
+ 
+
+    <script>
+        const productContainer = document.getElementById("contenedor-producto");
+        const formulario = document.getElementById("form-delete");
+        const urlBase = "http://localhost:25565";
+
+        const obtenerDatosForm= async()=>{
+            formulario.addEventListener("submit", async event =>{
+                event.preventDefault();
+
+                const id = event.target.ProdId.value.trim();
+                
+                try {
+                    
+                    let response = await fetch(`${urlBase}/api/products/${id}`);
+                    response = await response.json();
+
+
+                    let arrProductos = response.payload;
+                    renderizarProducto(arrProductos);
+
+
+                } catch (error) {
+                    console.log("error envio user a la bd: ",error);
+                }
+                
+            })
+
+        }
+        
+        const renderizarProducto=(arrProductos)=>{
+            let html =``;
+
+            arrProductos.forEach(prod => {
+                html += `
+                <div class="card-producto">
+                    <img class="img-product" src="${prod.image}" alt="">
+                    <h4>${prod.name}</h4>
+                    <p>ID: ${prod.id}</p>
+                    <p class="card-price">$${prod.price}</p>
+                    <div class="">
+                        <button class="btn-eliminar">Eliminar</button>     
+                    </div>
+                </div>
+                `;
+            });
+
+            productContainer.innerHTML = html;
+            btnEliminar = document.querySelector(".btn-eliminar");
+
+            btnEliminar.addEventListener("click",(e)=>{
+                let confirmacion = confirm("Queres eliminar este producto?");
+
+                if(!confirmacion){
+                    alert("operacion cancelada");
+                }
+                else{
+                     eliminarProducto(arrProductos[0].id);
+                }
+            });
+        }
+
+        const eliminarProducto= async (id)=>{
+
+            try {
+
+                let response = await fetch(`${urlBase}/api/products/${id}`,{
+                    method: "DELETE"
+                })
+
+                response = await response.json();
+                alert(response.message);
+                
+            } catch (error) {
+                console.log("Error eliminacion producto: ", error);
+            }
+        }   
+
+
+        obtenerDatosForm();
+        </script>
+
+  </body>
+</html>

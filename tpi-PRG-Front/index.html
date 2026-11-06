@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/styles.css" />
+    <title>TPI - PRG III</title>
+  </head>
+  <body>
+
+    <header>
+
+      <div class="header-content">
+
+        <div class="logo-container">
+          <img src="./img/logo.webp" alt="" />
+        </div>
+
+        <div class="nav-container">
+          <nav>
+            <ul class="nav-content">
+              <li><a href="index.html">Inicio</a></li>
+              <li><a href="get.html">Obtener</a></li>
+              <li><a href="post.html">Crear</a></li>
+              <li><a href="put.html">Modificar</a></li>
+              <li><a href="delete.html">Eliminar</a></li>
+            </ul>
+          </nav>
+        </div>
+
+      </div>
+
+    </header>
+
+    <main>
+        <section id="product-container"></section>
+    </main>
+
+
+    <script>
+        const productContainer = document.getElementById("product-container");
+        const urlBase = "http://localhost:25565";
+
+        const obtenerDatos = async () => {
+
+            try {
+              
+              let respuesta = await fetch(`${urlBase}/api/products`);
+              respuesta = await respuesta.json()
+
+              const data = respuesta.payload;
+              renderizarProductos(data);
+
+            } catch (error) {
+              console.error("Error en la obtencion de datos",error);
+            }
+        
+        }
+
+        const renderizarProductos = (array)=>{
+
+          let html =``;
+
+          array.forEach(prod => {
+            html += `
+              <div class="card-producto">
+                <img class="img-product" src="${prod.image}" alt="">
+                <h4>${prod.name}</h4>
+                <p>ID: ${prod.id}</p>
+                <p class="card-price">$${prod.price}</p>
+              </div>
+            `;
+          });
+
+          productContainer.innerHTML = html;
+        }
+
+        obtenerDatos();
+    </script>
+
+  </body>
+</html>

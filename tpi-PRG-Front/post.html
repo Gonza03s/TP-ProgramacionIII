@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <title>TPI - PRG III</title>
+  </head>
+  <body>
+
+    <header>
+
+      <div class="header-content">
+
+        <div class="logo-container">
+          <img src="./img/logo.webp" alt="" />
+        </div>
+
+        <div class="nav-container">
+          <nav>
+            <ul class="nav-content">
+              <li><a href="index.html">Inicio</a></li>
+              <li><a href="get.html">Obtener</a></li>
+              <li><a href="#">Crear</a></li>
+              <li><a href="put.html">Modificar</a></li>
+              <li><a href="delete.html">Eliminar</a></li>
+            </ul>
+          </nav>
+        </div>
+
+      </div>
+
+    </header>
+
+    
+    <section class="form-section">
+
+        <div class="form-container">
+            
+            <div class="form-title">
+                <h2>Crear Producto</h2>
+            </div>
+
+            <form id="form-post">
+
+                <label for="categoryProd">Categoria</label>
+                <select name="category" id="categoryProd" required>
+                    <option value="food">comida</option>
+                    <option value="food">bebida</option>
+                </select>
+
+                <label for="image-prod">Imagen</label>
+                <input type="text" name="image" id="image-prod" required>
+
+                <label for="name-prod">Nombre</label>
+                <input type="text" name="name" id="name-prod" required>
+           
+                <label for="price-prod">Precio</label>
+                <input type="number" name="price" id="price-prod" required>
+           
+                <input type="submit" value="Crear Producto">
+            </form>
+        </div>
+        
+
+    </section>
+
+
+    <script>
+        const formularioCrearProducto = document.getElementById("form-post");
+        const urlBase = "http://localhost:25565";
+
+        const obtenerDatosForm=()=>{
+            formularioCrearProducto.addEventListener("submit",async event=>{
+
+                event.preventDefault();
+                const formData = new FormData(event.target);
+                const formObjJs = Object.fromEntries(formData.entries());
+                const formJson = JSON.stringify(formObjJs);
+
+                try {
+
+                    let respuesta = await fetch(`${urlBase}/api/products`,{
+                        method: "POST",
+                        headers: {"Content-Type": "application/json"},
+                        body: formJson
+                    });
+
+                    let data = await respuesta.json()
+                    alert(data.message)
+                } catch (error) {
+                    console.error("error en el envio de datos al back: ",error);
+                }
+
+            })
+
+        }
+
+       obtenerDatosForm();
+    </script>
+
+  </body>
+</html>
