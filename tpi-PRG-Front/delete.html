@@ -68,18 +68,25 @@
             formulario.addEventListener("submit", async event =>{
                 event.preventDefault();
 
-                const id = event.target.ProdId.value.trim();
+                const id = Number(event.target.ProdId.value.trim());
+
+                 if(!id || id <= 0){
+                  return mostrarMensaje("error","Ingresa un id valido");
+                }
+
                 
                 try {
                     
                     let response = await fetch(`${urlBase}/api/products/${id}`);
-                    response = await response.json();
 
+                    if(!response.ok){
+                        return mostrarMensaje("error",data.message);
+                    }
+
+                    response = await response.json();
 
                     let arrProductos = response.payload;
                     renderizarProducto(arrProductos);
-
-
                 } catch (error) {
                     console.log("error envio user a la bd: ",error);
                 }
@@ -128,14 +135,21 @@
                     method: "DELETE"
                 })
 
-                response = await response.json();
-                alert(response.message);
+                if(!response.ok){
+                    return mostrarMensaje("error",result.message);
+                }
                 
+                response = await response.json();
+
+                mostrarMensaje("exito",response.message);
             } catch (error) {
                 console.log("Error eliminacion producto: ", error);
             }
         }   
 
+        function mostrarMensaje(estado,mensaje){
+          productContainer.innerHTML = `<p class= "mensaje  ${estado} }">${mensaje}</p>`
+        }
 
         obtenerDatosForm();
         </script>

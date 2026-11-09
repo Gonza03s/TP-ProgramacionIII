@@ -69,15 +69,25 @@
             formulario.addEventListener("submit", async event =>{
 
                 event.preventDefault();
-                const id = event.target.ProdId.value.trim();
+
+                const id = Number(event.target.ProdId.value.trim()); 
+
+                if(!id || id <= 0){
+                  return mostrarMensaje("error","Ingresa un id valido");
+                }
+
+
+               try {
+                  let resultado = await fetch(`${urlBase}/api/products/${id}`)
+                  resultado = await resultado.json();
+
+                  const data = resultado.payload;
+                  renderizarProducto(data);
                 
-
-                //trycatch
-                let resultado = await fetch(`${urlBase}/api/products/${id}`)
-                resultado = await resultado.json();
-
-                const data = resultado.payload;
-                renderizarProducto(data);
+               } catch (error) {
+                console.log("error al traer los datos: ",error);
+               }
+               
             })
 
         }
@@ -100,8 +110,17 @@
             productContainer.innerHTML = html;
         }
 
-        obtenerDatosForm();
+        function mostrarMensaje(estado,mensaje){
+          productContainer.innerHTML = `<p class= "mensaje  ${estado} }">${mensaje}</p>`
+        }
 
+
+
+
+
+
+        
+        obtenerDatosForm();
     </script>
 
   </body>

@@ -65,26 +65,66 @@
       const productContainer = document.getElementById("contenedor-producto");
       const urlBase = "http://localhost:25565";
 
-      const obtenerProducto=()=>{
+      function validarFormulario(data){
+            const errores = [];
 
+            if(!data.name || data.name.trim().length < 2){
+                errores.push("El nombre debe tener al menos dos caracteres")
+            }
+
+            if(!data.price || data.price < 0 ){
+                errores.push("el precio debe ser mayor  a 0")
+            }
+            //validar imgs
+
+            if(!data.category){
+                errores.push("debe seleccionar una categoria");
+            }
+
+            return errores;
+        }
+
+      function mostrarListaErrores(array){
+            let htmlErrores = "";
+
+            array.foreach(error=>{
+                htmlErrores+=`
+                    <p class= "mensaje error}">${error}</p>
+                ` 
+            })
+            productContainer.innerHTML = htmlErrores;
+        }
+
+      function mostrarMensaje(estado,mensaje){
+          productContainer.innerHTML = `<p class= "mensaje  ${estado} }">${mensaje}</p>`
+        }
+
+      const obtenerProducto=()=>{
         formulario.addEventListener("submit",async event=>{
           event.preventDefault();
 
-          const id= event.target.ProdId.value.trim();
+          const id= Number(event.target.ProdId.value.trim()) ;
+
+            if(!id || id <= 0){
+                return mostrarMensaje("error","Ingresa un id valido");
+              }
 
           try {
 
-            let response = await fetch(`${urlBase}/api/products/${id}`)
-            response = await response.json();
+              let response = await fetch(`${urlBase}/api/products/${id}`)
+              let data = await response.json();
+              
+              if(!response.ok){
+                return mostrarMensaje("error",data.message);
+              }
 
-            let arrProducto = response.payload;
-            
-            renderizarProducto(arrProducto)
+              let arrProducto = data.payload;
+              renderizarProducto(arrProducto)
+              
           } catch (error) {
             console.log("error al traer datos de la back: ",error);
           }
         })
-
       }
       
       const renderizarProducto =(arrProducto)=>{
@@ -118,7 +158,6 @@
         })
       }
 
-
       const mostrarFormActualizacion=async(producto)=>{
 
         let html =`
@@ -128,8 +167,8 @@
 
             <label for="categoryProd">Categoria</label>
             <select name="category" id="categoryProd" required>
-                <option value="food">comida</option>
-                <option value="food">bebida</option>
+                <option value="medications">medicamento</option>
+                <option value="sports supplements">suplemento deportivo</option>
             </select>
 
             <label for="image-prod">Imagen</label>
@@ -155,15 +194,24 @@
 
       }
 
-
       const actualizarProducto = async (event) => {
-
         event.preventDefault();
-
+        
+        // el id esta en el input hidden formdata lo incluye
         const formData = new FormData(event.target);
         const formObj = Object.fromEntries(formData.entries());
+        
+        formObj.price = Number(formObj.price);
+        formObj.name = formObj.name.trim();
+        
+        const errores = validarFormulario(formObj);
+        
+        if(errores.length > 0){
+          console.error(errores);
+          return mostrarListaErrores(errores);
+        }
+        
         const dataJson = JSON.stringify(formObj);
-
         try {
 
           let response = await fetch(`${urlBase}/api/products`,{
@@ -172,18 +220,18 @@
             body:dataJson
           });
 
+          if(!response.ok){
+            return mostrarMensaje("error", resultadoServer.message);
+          }
+
           let dataBackend = await response.json();
-          alert(dataBackend.message)
-
-
-          productContainer.innerHTML = "";
-
+          
+          mostrarMensaje("exito",dataBackend.message)
         } catch (error) {
           console.log("error al mandar al back", error);
         }
       }
 
-      
       obtenerProducto();
     </script>
 

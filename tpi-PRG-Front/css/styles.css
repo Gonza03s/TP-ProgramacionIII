@@ -1,12 +1,38 @@
+:root {
+  --mensaje-verde: #0a3622;
+  --fondo-verde: #dle7dd;
+  --borde-verde: #a3cfbb;
+  --mensaje-rojo: #58151c;
+  --fondo-rojo: #f8d7da;
+  --borde-rojo: #f1aeb5;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+.mensaje {
+  margin: 0 auto;
+  border: 1px solid;
+  padding: 20px 60px;
+  border-radius: 6px;
+}
+
+.error {
+  color: var(--mensaje-rojo);
+  background-color: var(--fondo-rojo);
+}
+
+.exito {
+  color: var(--mensaje-verde);
+  background-color: var(--fondo-verde);
+  border: 1px solid var(--borde-verde);
+}
 
 header {
-  background: linear-gradient(90deg, #080C14 0%, #111726 50%, #080C14 100%);
+  background: linear-gradient(90deg, #080c14 0%, #111726 50%, #080c14 100%);
 }
 
 .header-content {
@@ -32,7 +58,6 @@ header {
 */
 
 #product-container {
-
   background-color: #080c14;
   background-image:
     radial-gradient(
@@ -64,7 +89,6 @@ header {
 }
 
 .card-producto {
-
   background: linear-gradient(
     180deg,
     rgba(20, 27, 43, 0.75) 0%,
@@ -74,7 +98,6 @@ header {
   box-shadow:
     0 4px 20px -2px rgba(0, 0, 0, 0.5),
     inset 0 1px 0 rgba(255, 255, 255, 0.04);
-
 
   padding: 2rem;
   border-radius: 20px;
@@ -90,44 +113,52 @@ header {
   font-weight: 700;
 }
 
-
-
 /* 
 =====================
     GET    FORM 
 =====================
 */
-.form-section{
-    height: 100vh;
-    background-color: #080C14;
-    background-image: 
-        radial-gradient(circle at 10% 8%, rgba(56, 189, 248, 0.08) 0%, transparent 35%),
-        radial-gradient(circle at 90% 20%, rgba(245, 158, 11, 0.05) 0%, transparent 40%),
-        radial-gradient(circle at 50% 90%, rgba(56, 189, 248, 0.04) 0%, transparent 50%);
-    
-        display: flex;
-        align-items: center;
-        justify-content: center;
+.form-section {
+  height: 100vh;
+  background-color: #080c14;
+  background-image:
+    radial-gradient(
+      circle at 10% 8%,
+      rgba(56, 189, 248, 0.08) 0%,
+      transparent 35%
+    ),
+    radial-gradient(
+      circle at 90% 20%,
+      rgba(245, 158, 11, 0.05) 0%,
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at 50% 90%,
+      rgba(56, 189, 248, 0.04) 0%,
+      transparent 50%
+    );
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.form-container{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
-    color:white;
-    border: 1px solid red;
-    padding: 6rem 4rem;
-    width: 50%;
+.form-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  color: white;
+  border: 1px solid red;
+  padding: 6rem 4rem;
+  width: 50%;
 }
 
-
-.submit-container input{
-    margin: 1rem 0;
-    width: 100%;
+.submit-container input {
+  margin: 1rem 0;
+  width: 100%;
 }
-
 
 /* 
 =====================
@@ -135,7 +166,7 @@ header {
 =====================
 */
 
-#form-post{
+#form-post {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -144,21 +175,8 @@ header {
   gap: 1rem;
 }
 
-
 /* 
 =====================
     DELETE    FORM 
 =====================
 */
-
-
-
-
-
-
-
-
-
-
-
-
