@@ -1,0 +1,34 @@
+<%- include("partials/head.ejs") %>
+<%- include("partials/header.ejs") %>
+
+
+
+    <section class="form-section">
+
+        <div class="form-container">
+            
+            <div class="form-title">
+                <h2>Eliminar Producto</h2>
+            </div>
+
+            <form id="form-delete">
+
+                <label for="ProdId"></label>
+                <input type="number" name="ProdId" id="ProdId">
+
+                <div class="submit-container">
+                    <input type="submit" value="Enviar"></input>
+                </div>
+
+            </form>
+            <div id="contenedor-producto"></div>
+        </div>
+        
+
+    </section>
+
+ 
+
+    <script src="/js/delete.js"></script>
+  </body>
+</html>

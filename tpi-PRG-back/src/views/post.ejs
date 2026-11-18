@@ -1,0 +1,44 @@
+<%- include("partials/head.ejs") %>
+<%- include("partials/header.ejs") %>
+
+
+    <section class="form-section">
+
+        <div class="form-container">
+            
+            <div class="form-title">
+                <h2>Crear Producto</h2>
+            </div>
+
+            <form id="form-post">
+
+                <label for="categoryProd">Categoria</label>
+                <select name="category" id="categoryProd" required>
+                    <option value="medications">medicamento</option>
+                    <option value="sports supplements">suplemento deportivo</option>
+                </select>
+
+                <label for="image-prod">Imagen</label>
+                <input type="text" name="image" id="image-prod" required>
+
+                <label for="name-prod">Nombre</label>
+                <input type="text" name="name" id="name-prod" required>
+           
+                <label for="price-prod">Precio</label>
+                <input type="number" name="price" id="price-prod" required>
+           
+                <input type="submit" value="Crear Producto">
+            </form>
+        </div>
+        
+        <section id="contenedor-productos"></section>
+
+
+    </section>
+
+      <div id="contenedor-producto"></div>
+
+      
+    <script src="/js/post.js"></script>
+  </body>
+</html>
