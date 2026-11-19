@@ -42,7 +42,17 @@ const validateProducts= (req,res,next)=>{
     next();
 }
 
+const requiredLogin=(req,res,next)=>{
+
+    if(!req.session.user){
+        return res.redirect("/login");
+    }
+
+    next();
+}
+
 export{
     validateId,
-    validateProducts
+    validateProducts,
+    requiredLogin
 }

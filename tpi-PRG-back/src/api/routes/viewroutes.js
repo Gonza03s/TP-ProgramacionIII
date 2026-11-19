@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { requiredLogin } from "../middleware/middlewares.js";
 import {
   vistaConsultar,
   vistaCrear,
@@ -9,10 +10,10 @@ import {
 
 const router = Router();
 
-router.get("/principal", vistaProductos);
-router.get("/consultar", vistaConsultar);
-router.get("/crear", vistaCrear);
-router.get("/modificar", vistaModificar);
-router.get("/eliminar", vistaEliminar);
+router.get("/principal", requiredLogin, vistaProductos);
+router.get("/consultar", requiredLogin, vistaConsultar);
+router.get("/crear", requiredLogin, vistaCrear);
+router.get("/modificar", requiredLogin, vistaModificar);
+router.get("/eliminar", requiredLogin, vistaEliminar);
 
 export default router;

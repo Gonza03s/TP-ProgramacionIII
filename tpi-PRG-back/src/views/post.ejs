@@ -36,9 +36,42 @@
 
     </section>
 
-      <div id="contenedor-producto"></div>
 
-      
+    <section class="createUser-container">
+        <h3> Crear usuario admin </h3>
+
+        <form id="createUserForm" action="/api/users" method="POST">
+
+            <label for="nameUser">Nombre</label>
+            <input type="text" name="name" id="nameUser" required>
+
+            <label for="emailUser">Email</label>
+            <input type="email" name="email" id="emailUser" required>
+
+            <label for="passwordUser">Password</label>
+            <input type="password" name="password" id="passwordUser" required>
+
+            <input type="submit" value="Crear admin">
+
+        </form>
+    </section>
+    
+
+    <div id="contenedor-producto"></div>
+
+    
+      <div id="mensajes">
+        <% if (typeof exito !== "undefined") { %>
+            <p class="mensaje exito centrado"> <%= exito %> </p>
+        <% } %>
+    
+        <% if (typeof error !== "undefined") { %>
+            <p class="mensaje error centrado"> <%= error %> </p>
+        <% } %>
+    </div>
+
+
+
     <script src="/js/post.js"></script>
   </body>
 </html>

@@ -1,0 +1,27 @@
+<%- include("partials/head.ejs") %>
+<%- include("partials/header.ejs") %>
+
+<main>
+
+    <section>
+        <h2> <%= about %> </h2>
+
+        <form id="login-form" action="/login" method="POST" >
+            
+            <label for="emailUser"></label>
+            <input type="email" name="email" id="emailUser" required>
+
+            <label for="passwordUser"></label>
+            <input type="password" name="password" id="passwordUser" required>
+
+            <input type="submit" value="Login">
+
+        </form>
+    </section>
+
+
+    <% if (typeof error !== "undefined") { %>
+        <p class="mensaje error centrado"> <%= error %> </p>
+    <% } %>
+    
+</main>

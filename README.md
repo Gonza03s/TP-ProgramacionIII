@@ -1,2 +1,3 @@
 TODO:
-implementar ultima clase, login express session + bcrypt
+implementar optimizaciones
+modularizacion
