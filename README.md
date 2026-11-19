@@ -1,3 +1,2 @@
 TODO:
-implementar optimizaciones
-modularizacion
+estilos css vistas

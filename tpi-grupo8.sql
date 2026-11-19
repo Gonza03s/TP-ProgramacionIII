@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 09-11-2026 a las 18:14:43
+-- Tiempo de generación: 20-11-2026 a las 00:19:47
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -65,7 +65,8 @@ INSERT INTO `products` (`id`, `name`, `image`, `category`, `price`, `active`) VA
 (22, 'prueba123', 'https://www.mostazaweb.com.ar/wp-content/uploads/2026/03/MAY0-3-copia.png', 'medications', 1.00, 1),
 (23, 'prueba1234', 'https://asset.action.com/image/upload/t_digital_square/w_256/2537612_5000112679687-111_01_fcwfbm.jpg', 'medications', 12.00, 1),
 (24, 'prueba123', 'https://asset.action.com/image/upload/t_digital_square/w_256/2537612_5000112679687-111_01_fcwfbm.jpg', 'medications', 12.00, 1),
-(25, 'prueba123', 'https://www.mostazaweb.com.ar/wp-content/uploads/2026/03/MAY0-3-copia.png', 'medications', 414.00, 1);
+(25, 'prueba123', 'https://www.mostazaweb.com.ar/wp-content/uploads/2026/03/MAY0-3-copia.png', 'medications', 414.00, 1),
+(51, 'medications', 'https://pedidosfarma.vtexassets.com/arquivos/ids/230758-219-219?v=639007481909730000&width=219&height=219&aspect=true', 'medications', 14.00, 1);
 
 -- --------------------------------------------------------
 
@@ -105,6 +106,14 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
+-- Volcado de datos para la tabla `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `email`, `password`) VALUES
+(1, 'test', 'test@test.com', '$2b$10$4AuteWRPS2E03RBuPL4/H.jvFmj5N70JdZBTYW7eNHquiaGUTFgXO'),
+(2, 'pepe', 'pepe@pepe.com', '$2b$10$J0y4t5V2DjcY1Nm9g14R8uZh4UEMBVzlYipl0ANyMrc908v4A5NGG');
+
+--
 -- Índices para tablas volcadas
 --
 
@@ -134,7 +143,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT de la tabla `sales`
@@ -146,7 +155,7 @@ ALTER TABLE `sales`
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
