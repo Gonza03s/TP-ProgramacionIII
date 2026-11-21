@@ -68,14 +68,14 @@ const renderizarProducto = (arrProducto) => {
 
   arrProducto.forEach((prod) => {
     html += `
-            <div class="card-producto">
-                <img class="img-product" src="${prod.image}" alt="">
-                <div class="card-text">
-                  <h4>${prod.name}</h4>
-                  <p>ID: ${prod.id}</p>
-                  <p class="card-price">$${prod.price}</p>
-                </div>
+            <div class="card-producto card-get">
+              <img class="img-product" src="${prod.image}" alt="">
+              <div class="card-text">
+                <h4>${prod.name}</h4>
+                <p>ID: ${prod.id}</p>
+                <p class="card-price">$${prod.price}</p>
                 <button class="btn-modificar btn-enviar">Modificar</button>
+              </div>
             </div>
             `;
   });
@@ -97,7 +97,7 @@ const renderizarProducto = (arrProducto) => {
 const mostrarFormActualizacion = async (producto) => {
   let html = `
             <form id="form-put-act">
-
+            <h3>Actualizar Producto</h3>
             <input type="hidden" name="id" value="${producto.id}">
 
             <label for="categoryProd">Categoria</label>

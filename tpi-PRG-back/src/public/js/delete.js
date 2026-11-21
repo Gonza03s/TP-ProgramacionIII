@@ -34,15 +34,17 @@ const renderizarProducto = (arrProductos) => {
 
   arrProductos.forEach((prod) => {
     html += `
-                <div class="card-producto">
-                    <img class="img-product" src="${prod.image}" alt="">
-                    <h4>${prod.name}</h4>
-                    <p>ID: ${prod.id}</p>
-                    <p class="card-price">$${prod.price}</p>
-                    <div class="">
-                        <button class="btn-eliminar btn-enviar">Eliminar</button>     
-                    </div>
-                </div>
+          <div class="card-producto card-get">
+                          
+              <img class="img-product" src="${prod.image}" alt="">
+
+              <div class="card-text">
+                  <h4>${prod.name}</h4>
+                  <p>ID: ${prod.id}</p>
+                  <p class="card-price">$${prod.price}</p>
+                  <button class="btn-eliminar btn-enviar">Eliminar</button>     
+              </div>
+          </div>
                 `;
   });
 

@@ -2,19 +2,20 @@
 <%- include("partials/header.ejs") %>
 
 
-    <section class="forms-post-section-container">
-
+<section class="forms-post-section-container">
+    
+    <div id="mensajes">
+        <% if (typeof exito !== "undefined") { %>
+            <p class="mensaje exito centrado"> <%= exito %> </p>
+        <% } %>
+    
+        <% if (typeof error !== "undefined") { %>
+            <p class="mensaje error centrado"> <%= error %> </p>
+        <% } %>
+    </div>
+    
         <div id="contenedor-producto"></div>
 
-        <div id="mensajes">
-            <% if (typeof exito !== "undefined") { %>
-                <p class="mensaje exito centrado"> <%= exito %> </p>
-            <% } %>
-        
-            <% if (typeof error !== "undefined") { %>
-                <p class="mensaje error centrado"> <%= error %> </p>
-            <% } %>
-        </div>
 
         <div class="forms-post-content">
 

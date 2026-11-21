@@ -59,13 +59,12 @@
 
 .mensaje {
   margin: 0 auto;
-  border: 1px solid;
   padding: 20px 60px;
   border-radius: 6px;
 }
 
 .error {
-  max-width: 50%;
+  max-width: 100%;
   margin-top: 4rem;
   font-size: 1.2rem;
   color: var(--mensaje-rojo);
@@ -73,7 +72,7 @@
 }
 
 .exito {
-  max-width: 50%;
+  max-width: 100%;
   margin-top: 4rem;
   font-size: 1.2rem;
   color: var(--mensaje-verde);
@@ -92,7 +91,6 @@
 */
 
 
-
 .header-content {
   display: flex;
   align-items: center;
@@ -100,6 +98,8 @@
 
   position: sticky;
   width: 100%;
+  top: 0;
+  left: 0;
   z-index: 100;
   
   padding: 0 1.25rem;
@@ -145,12 +145,19 @@
   padding: 1rem 1.25rem;
 }
 
+
+.nav-content a {
+  display: block;
+  padding: 0.7rem 1rem;
+}
+
+
  #menu-toggle:checked ~ .nav-container{
   max-height: 400px;
  }
 
 
-.nav-content li, a{
+.nav-content, li, a{
   list-style-type: none;
   text-decoration: none;
   color: white;
@@ -170,6 +177,9 @@
   background-color: #9796c5;
 }
 
+.nav-content a:hover{
+  color: #583fc6;
+}
 
 
 /*=====================
@@ -285,7 +295,6 @@ form input:focus{
 .card-producto {
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 1rem;
   
   padding: 1rem;
@@ -299,6 +308,8 @@ form input:focus{
 }
 
 .card-producto img {
+  display: block;
+  margin: 0 auto;
   width: 150px;
   object-fit: cover;
   border-radius: 15px;
@@ -329,6 +340,8 @@ form input:focus{
   min-height: calc(100vh - 80px); /*80px mide el navbar, aplica resta para evitar desborde eje y*/
   background-color: var(--bg-dark-base);
   background-image: var(--bg-dark-gradient);
+  color: white;
+
 }
 
 .form-section {
@@ -347,7 +360,6 @@ form input:focus{
   border-radius: 12px;
   padding: 1rem 2.5rem;
   background-color: var(--bg-dark-form);
-  color: white;
 }
 
 .submit-container input {
@@ -358,14 +370,20 @@ form input:focus{
 .card-get{
   margin: 0 auto;
   text-align: center;
-  width: 150px;
+  width: 170px;
 }
 
 .card-get img{
-  width: 120px;
+  width: 130px;
 }
 
+.contenedor-producto-get{
+  width: 100%;
+}
 
+.card-producto, .card-get{
+  margin-top: 2rem;
+}
 
 /* 
 =====================
@@ -384,6 +402,7 @@ form input:focus{
   background-image: var(--bg-dark-gradient);
   min-height: calc(100vh - 80px);
   padding: 1rem 3rem;
+  color: white;
 }
 
 .forms-post-content{
@@ -408,6 +427,11 @@ form input:focus{
   text-align: start;
 }
 
+
+
+
+
+
 /* 
 =====================
     PUT FORM     
@@ -422,12 +446,34 @@ form input:focus{
   min-height: calc(100vh - 80px);
   background-color: var(--bg-dark-base);
   background-image: var(--bg-dark-gradient);
+  color: white;
+}
+
+#form-put-container h2{
+  margin-bottom: 1.5rem;
 }
 
 
 .form-container , #form-put-container{
-  padding: 2rem 4rem;
+  padding: 1.3rem;
 }
+
+.form-container , #form-put-act{
+  background-color: var(--bg-dark-form);
+  padding: 1.5rem;
+}
+
+.form-container, .form-section-put{
+  margin-top: 6rem;
+}
+
+
+.contenedor-producto-put, #form-put-act{
+  padding: 2rem;
+  border-radius: 6px;
+}
+
+
 
 
 #contenedor-producto{
@@ -442,6 +488,9 @@ form input:focus{
   flex-direction: column;
 }
 
+.contenedor-producto-put{
+  width: 100%;
+}
 
 
 /* 
@@ -450,7 +499,6 @@ form input:focus{
 =====================
 */
 
-
 .delete-container{
   display: flex;
   justify-content: center;
@@ -458,11 +506,17 @@ form input:focus{
   min-height: calc(100vh - 80px);
   background-color: var(--bg-dark-base);
   background-image: var(--bg-dark-gradient);
+  color: white;
 }
 
 
+.form-container, .form-delete{
+  padding: 2rem;
+}
 
-
+.contenedor-producto-delete{
+  width: 100%;
+}
 
 
 
@@ -584,12 +638,40 @@ form input:focus{
 
 
 .form-container , #form-put-container{
-  padding: 4rem 6rem;
+  padding: 2rem;
 }
 
 .btn-enviar, .btn-put{
   font-size: 1.2rem;
 }
+
+.form-container , #form-put-act{
+  font-size: 1.2rem;
+  padding: 4rem;
+}
+
+
+
+
+/* 
+=====================
+    DELETE    
+=====================
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 }
