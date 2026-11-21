@@ -2,74 +2,77 @@
 <%- include("partials/header.ejs") %>
 
 
-    <section class="form-section">
+    <section class="forms-post-section-container">
 
-        <div class="form-container">
-            
-            <div class="form-title">
-                <h2>Crear Producto</h2>
-            </div>
+        <div id="contenedor-producto"></div>
 
-            <form id="form-post">
-
-                <label for="categoryProd">Categoria</label>
-                <select name="category" id="categoryProd" required>
-                    <option value="medications">medicamento</option>
-                    <option value="sports supplements">suplemento deportivo</option>
-                </select>
-
-                <label for="image-prod">Imagen</label>
-                <input type="text" name="image" id="image-prod" required>
-
-                <label for="name-prod">Nombre</label>
-                <input type="text" name="name" id="name-prod" required>
-           
-                <label for="price-prod">Precio</label>
-                <input type="number" name="price" id="price-prod" required>
-           
-                <input type="submit" value="Crear Producto">
-            </form>
-        </div>
+        <div id="mensajes">
+            <% if (typeof exito !== "undefined") { %>
+                <p class="mensaje exito centrado"> <%= exito %> </p>
+            <% } %>
         
-        <section id="contenedor-productos"></section>
+            <% if (typeof error !== "undefined") { %>
+                <p class="mensaje error centrado"> <%= error %> </p>
+            <% } %>
+        </div>
 
+        <div class="forms-post-content">
+
+            <section class="form-section">
+
+                <div class="form-container">
+                    
+                    <h2>Crear Producto</h2>
+
+                    <form id="form-post">
+
+                        <label for="categoryProd">Categoria</label>
+                        <select class="input-style" name="category" id="categoryProd" required>
+                            <option value="medications">medicamento</option>
+                            <option value="sport s supplements">suplemento deportivo</option>
+                        </select>
+
+                        <label for="image-prod">Imagen</label>
+                        <input class="input-style" type="text" name="image" id="image-prod" required>
+
+                        <label for="name-prod">Nombre</label>
+                        <input class="input-style" type="text" name="name" id="name-prod" required>
+                
+                        <label for="price-prod">Precio</label>
+                        <input class="input-style" type="number" name="price" id="price-prod" required>
+                
+                        <input class="btn-enviar" type="submit" value="Crear Producto">
+                    </form>
+                </div>
+                
+                <section id="contenedor-productos"></section>
+
+
+            </section>
+
+            <section class="createUser-container form-container ">
+
+                <h3> Crear usuario admin </h3>
+
+                <form id="createUserForm" action="/api/users" method="POST">
+
+                    <label for="nameUser">Nombre</label>
+                    <input class="input-style" type="text" name="name" id="nameUser" required>
+
+                    <label for="emailUser">Email</label>
+                    <input class="input-style" type="email" name="email" id="emailUser" required>
+
+                    <label for="passwordUser">Password</label>
+                    <input class="input-style" type="password" name="password" id="passwordUser" required>
+
+                    <input class="btn-enviar" type="submit" value="Crear admin">
+
+                </form>
+            </section>
+
+        </div>
 
     </section>
-
-
-    <section class="createUser-container">
-        <h3> Crear usuario admin </h3>
-
-        <form id="createUserForm" action="/api/users" method="POST">
-
-            <label for="nameUser">Nombre</label>
-            <input type="text" name="name" id="nameUser" required>
-
-            <label for="emailUser">Email</label>
-            <input type="email" name="email" id="emailUser" required>
-
-            <label for="passwordUser">Password</label>
-            <input type="password" name="password" id="passwordUser" required>
-
-            <input type="submit" value="Crear admin">
-
-        </form>
-    </section>
-    
-
-    <div id="contenedor-producto"></div>
-
-    
-      <div id="mensajes">
-        <% if (typeof exito !== "undefined") { %>
-            <p class="mensaje exito centrado"> <%= exito %> </p>
-        <% } %>
-    
-        <% if (typeof error !== "undefined") { %>
-            <p class="mensaje error centrado"> <%= error %> </p>
-        <% } %>
-    </div>
-
 
 
     <script src="/js/post.js"></script>

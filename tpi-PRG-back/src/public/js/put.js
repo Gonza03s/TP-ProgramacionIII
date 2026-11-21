@@ -70,10 +70,12 @@ const renderizarProducto = (arrProducto) => {
     html += `
             <div class="card-producto">
                 <img class="img-product" src="${prod.image}" alt="">
-                <h4>${prod.name}</h4>
-                <p>ID: ${prod.id}</p>
-                <p class="card-price">$${prod.price}</p>
-                <button class="btn-modificar">Modificar</button>
+                <div class="card-text">
+                  <h4>${prod.name}</h4>
+                  <p>ID: ${prod.id}</p>
+                  <p class="card-price">$${prod.price}</p>
+                </div>
+                <button class="btn-modificar btn-enviar">Modificar</button>
             </div>
             `;
   });
@@ -99,28 +101,28 @@ const mostrarFormActualizacion = async (producto) => {
             <input type="hidden" name="id" value="${producto.id}">
 
             <label for="categoryProd">Categoria</label>
-            <select name="category" id="categoryProd" required>
+            <select class="input-style" name="category" id="categoryProd" required>
                 <option value="medications">medicamento</option>
                 <option value="sports supplements">suplemento deportivo</option>
             </select>
 
             <label for="image-prod">Imagen</label>
-            <input value=${producto.image} type="text" name="image" id="image-prod" required>
+            <input class="input-style" value=${producto.image} type="text" name="image" id="image-prod" required>
 
             <label for="name-prod">Nombre</label>
-            <input value=${producto.name} type="text" name="name" id="name-prod" required>
+            <input class="input-style" value=${producto.name} type="text" name="name" id="name-prod" required>
         
             <label for="price-prod">Precio</label>
-            <input value=${producto.price} type="number" name="price" id="price-prod" required>
+            <input class="input-style" value=${producto.price} type="number" name="price" id="price-prod" required>
 
 
             <label for="activeProd">Activo</label>
-            <select name="active" id="activeProd" required>
+            <select class="input-style" name="active" id="activeProd" required>
                 <option value="1">Activado</option>
                 <option value="0">Desactivado</option>
             </select>
 
-            <input type="submit" value="Modificar Producto">
+            <input class="btn-enviar btn-put" type="submit" value="Modificar Producto">
         </form>
         `;
 

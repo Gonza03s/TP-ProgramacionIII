@@ -2,18 +2,28 @@
 <%- include("partials/header.ejs") %>
 
     <main>
-        <section id="product-container">
+      <section id="product-container">
 
-          <% listaProductos.forEach(prod => { %>
+        <h1>Lista Productos</h1>
 
-              <div class="card-producto">
-                <img class="img-product" src= "<%=prod.image%>" alt= "<%=prod.image%>"  >
-                <h4> <%=prod.name%>  </h4>
-                <p>ID: <%=prod.id%></p>
-                <p class="card-price">$ <%=prod.price%> </p>
-              </div>
+          <div class="product-list-container">
+            <% listaProductos.forEach(prod => { %>
+              
+                <div class="card-producto">
 
-            <% }) %>
+                  <img class="img-product" src= "<%=prod.image%>" alt= "<%=prod.image%>"  >
+
+                  <div class="card-text">
+                    <h4> <%=prod.name%>  </h4>
+                    <p>ID: <%=prod.id%></p>
+                    <p class="card-price">$ <%=prod.price%> </p>
+                  </div>
+
+                </div>
+
+              <% }) %>
+          </div>
+
         </section>
     </main>
     

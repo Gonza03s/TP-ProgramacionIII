@@ -30,11 +30,15 @@ const renderizarProducto = (array) => {
 
   array.forEach((prod) => {
     html += `
-                <div class="card-producto">
+                <div class="card-producto card-get">
+                
                     <img class="img-product" src="${prod.image}" alt="">
-                    <h4>${prod.name}</h4>
-                    <p>ID: ${prod.id}</p>
-                    <p class="card-price">$${prod.price}</p>
+
+                    <div class="card-text">
+                      <h4>${prod.name}</h4>
+                      <p>ID: ${prod.id}</p>
+                      <p class="card-price">$${prod.price}</p>
+                    </div>
                 </div>
                 `;
   });

@@ -68,7 +68,7 @@ export const logoutUserAdmin = (req, res) => {
   req.session.destroy((error) => {
     if (error) {
       console.log("error al destruir la sesion", error);
-      res.status(500).json({
+      return res.status(500).json({
         message: "Error la destruir la sesion",
       });
     }

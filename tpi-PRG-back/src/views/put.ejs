@@ -1,21 +1,21 @@
 <%- include("partials/head.ejs") %>
 <%- include("partials/header.ejs") %>
     
-    <section class="form-section">
+<div class="put-container">
+    
+    <section class="form-section-put">
 
-        <div class="form-container">
+        <div class="form-container" id="form-put-container">
             
-            <div class="form-title">
-                <h2>Modificar Producto</h2>
-            </div>
+            <h2>Modificar Producto</h2>
 
             <form id="form-put">
 
                 <label for="ProdId"></label>
-                <input type="number" name="ProdId" id="ProdId">
+                <input class="input-style" type="number" name="ProdId" id="ProdId">
 
                 <div class="submit-container">
-                    <input type="submit" value="Enviar"></input>
+                    <input class="btn-enviar" type="submit" value="Enviar"></input>
                 </div>
                 
             </form>
@@ -23,9 +23,9 @@
             <div id="contenedor-producto"></div>
 
         </div>
-        
-
     </section>
+</div>
+
 
 
     <script src="/js/put.js"></script>

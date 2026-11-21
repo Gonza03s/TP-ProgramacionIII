@@ -1,27 +1,33 @@
 <%- include("partials/head.ejs") %>
 <%- include("partials/header.ejs") %>
 
-<main>
+<body class="body-login">
+    <main class="main-login">
 
-    <section>
-        <h2> <%= about %> </h2>
+        <section>
+            <% if (typeof error !== "undefined") { %>
+                <p class="mensaje error centrado"> <%= error %> </p>
+            <% } %>
+        </section>
 
-        <form id="login-form" action="/login" method="POST" >
-            
-            <label for="emailUser"></label>
-            <input type="email" name="email" id="emailUser" required>
+        <section class="login-section-container">
 
-            <label for="passwordUser"></label>
-            <input type="password" name="password" id="passwordUser" required>
+            <div class="login-content">
+                <h2> <%= about %> </h2>
+                    <form id="login-form" action="/login" method="POST" >
+                        
+                        <label for="emailUser"></label>
+                        <input class="input-style" type="email" name="email" id="emailUser" required placeholder="Email">
 
-            <input type="submit" value="Login">
+                        <label for="passwordUser"></label>
+                        <input class="input-style" type="password" name="password" id="passwordUser" required placeholder="Contraseña">
 
-        </form>
-    </section>
+                        <input class="btn-enviar" type="submit" value="Login">
 
-
-    <% if (typeof error !== "undefined") { %>
-        <p class="mensaje error centrado"> <%= error %> </p>
-    <% } %>
+                    </form>
+            </div>
+        </section>
     
-</main>
+    </main>
+</body>
+

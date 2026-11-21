@@ -40,7 +40,7 @@ const renderizarProducto = (arrProductos) => {
                     <p>ID: ${prod.id}</p>
                     <p class="card-price">$${prod.price}</p>
                     <div class="">
-                        <button class="btn-eliminar">Eliminar</button>     
+                        <button class="btn-eliminar btn-enviar">Eliminar</button>     
                     </div>
                 </div>
                 `;
