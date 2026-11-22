@@ -1,9 +1,11 @@
 import { Router } from "express";
-import { createProduct, getAllProducts, getProductById, modifyProduct, removeProduct } from "../controllers/controllers.js";
+import { createProduct, getActiveProducts, getAllProducts, getProductById, modifyProduct, removeProduct } from "../controllers/controllers.js";
 import { validateId, validateProducts } from "../middleware/middlewares.js" 
 
 
 const router = Router();
+
+router.get("/active", getActiveProducts);
 
 router.get("/", getAllProducts);
 
