@@ -10,7 +10,6 @@ export const getActiveProducts = async (req, res) => {
       });
     }
 
-    console.log("Backend productos activos:",rows);
     res.status(200).json({
       payload: rows,
     });
