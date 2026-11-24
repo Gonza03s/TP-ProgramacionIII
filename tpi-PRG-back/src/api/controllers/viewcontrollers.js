@@ -3,7 +3,7 @@ import productModels from "../models/models.js";
 export const vistaProductos = async (req, res) => {
   try {
     const [rows] = await productModels.selectAllProducts();
-
+    console.log(rows);
     res.render("index", {
       title: "Pagina principal",
       listaProductos: rows,

@@ -10,6 +10,7 @@ export const getActiveProducts = async (req, res) => {
       });
     }
 
+    console.log("Backend productos activos:",rows);
     res.status(200).json({
       payload: rows,
     });
@@ -61,14 +62,11 @@ export const createProduct = async (req, res) => {
     const { category, image, name, price } = req.body;
 
     const [rows] = await productModels.insertNewProduct(
-      category,
-      image,
       name,
+      image,
+      category,
       price,
     );
-
-    console.log(rows);
-    console.log("ID base de datos: ", rows.insertId);
 
     res.status(201).json({
       message: "producto creado con exito",

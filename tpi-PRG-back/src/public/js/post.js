@@ -54,6 +54,7 @@ const obtenerDatosForm = () => {
 
     const formJson = JSON.stringify(formObjJs);
 
+    console.log("datos enviados desde el cliente: ", formJson);
     try {
       let respuesta = await fetch(`${urlBase}/api/products`, {
         method: "POST",

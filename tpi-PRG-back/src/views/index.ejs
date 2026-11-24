@@ -8,13 +8,12 @@
 
           <div class="product-list-container">
             <% listaProductos.forEach(prod => { %>
-              
                 <div class="card-producto">
 
                   <img class="img-product" src= "<%=prod.image%>" alt= "<%=prod.image%>"  >
 
                   <div class="card-text">
-                    <h4> <%=prod.name%>  </h4>
+                    <h4> <%= prod.name%>  </h4>
                     <p>ID: <%=prod.id%></p>
                     <p class="card-price">$ <%=prod.price%> </p>
                   </div>
@@ -28,4 +27,6 @@
     </main>
     
   </body>
+
+
 </html>
