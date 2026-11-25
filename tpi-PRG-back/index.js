@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 import environments from "./src/api/config/environments.js";
-import { productRoutes, viewRoutes,authRoutes, usersRoutes, salesRouter } from "./src/api/routes/index.js";
+import { productRoutes, viewRoutes,authRoutes, usersRoutes, salesRouter, exportRouter } from "./src/api/routes/index.js";
 import { __dirname, join } from "./src/api/utils/index.js";
 import session from "express-session";
 
@@ -38,11 +38,14 @@ app.use("/api/products", productRoutes);
 
 app.use("/api/sales", salesRouter);
 
+app.use("/export",exportRouter);
+
 app.use("/api/users", usersRoutes);
 
 app.use("/dashboard", viewRoutes);
 
 app.use("/", authRoutes);
+
 
 
 
