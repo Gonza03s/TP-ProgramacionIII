@@ -70,7 +70,9 @@ const obtenerDatosForm = () => {
         return mostrarMensaje("error", data.message);
       }
 
-      mostrarMensaje("exito", mensajeCompleto);
+      // volver al dashboard
+      alert(mensajeCompleto);
+      window.location.href = "/dashboard/principal";
     } catch (error) {
       return mostrarMensaje("error", "error al enviar los datos");
     }

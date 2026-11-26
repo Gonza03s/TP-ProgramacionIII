@@ -754,3 +754,21 @@ form input:focus{
 .dashboard-titulo a.btn-enviar {
   width: auto;
 }
+
+/* header: nombre de la app y alumnos */
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.header-titulo {
+  color: #fff;
+  margin: 0;
+}
+
+.header-alumnos {
+  color: #9ca3af;
+  font-size: 0.8rem;
+  margin: 0;
+}
