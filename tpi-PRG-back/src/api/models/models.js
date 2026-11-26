@@ -13,7 +13,7 @@ const selectAllProducts = () => {
 
 const selectProductById = (id) => {
   const sql =
-    "SELECT id, name, price, image, active FROM products WHERE products.id = ?";
+    "SELECT id, name, price, image, category, active FROM products WHERE products.id = ?";
   return connection.query(sql, [id]);
 };
 

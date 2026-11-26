@@ -24,12 +24,12 @@ function validarFormulario(data) {
 function mostrarListaErrores(array) {
   let htmlErrores = "";
 
-  array.foreach((error) => {
+  array.forEach((error) => {
     htmlErrores += `
                     <p class= "mensaje error}">${error}</p>
                 `;
   });
-  contenedorProductos.innerHTML = htmlErrores;
+  productContainer.innerHTML = htmlErrores;
 }
 
 function mostrarMensaje(estado, mensaje) {
