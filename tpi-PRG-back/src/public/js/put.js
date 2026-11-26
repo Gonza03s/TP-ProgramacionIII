@@ -24,7 +24,7 @@ function validarFormulario(data) {
 function mostrarListaErrores(array) {
   let htmlErrores = "";
 
-  array.foreach((error) => {
+  array.forEach((error) => {
     htmlErrores += `
                     <p class= "mensaje error}">${error}</p>
                 `;
@@ -110,7 +110,7 @@ const mostrarFormActualizacion = async (producto) => {
             <input class="input-style" value=${producto.image} type="text" name="image" id="image-prod" required>
 
             <label for="name-prod">Nombre</label>
-            <input class="input-style" value=${producto.name} type="text" name="name" id="name-prod" required>
+            <input class="input-style" value="${producto.name}" type="text" name="name" id="name-prod" required>
         
             <label for="price-prod">Precio</label>
             <input class="input-style" value=${producto.price} type="number" name="price" id="price-prod" required>
@@ -165,11 +165,11 @@ const actualizarProducto = async (event) => {
 
     console.log("RESPUESTA Q LLEGA DESDE EL BACK PARA EL CLIENTE: ",response);
 
+    let dataBackend = await response.json();
     if (!response.ok) {
-      return mostrarMensaje("error", resultadoServer.message);
+      return mostrarMensaje("error", dataBackend.message);
     }
 
-    let dataBackend = await response.json();
 
     mostrarMensaje("exito", dataBackend.message);
   } catch (error) {

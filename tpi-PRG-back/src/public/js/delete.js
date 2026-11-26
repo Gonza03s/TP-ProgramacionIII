@@ -15,13 +15,13 @@ const obtenerDatosForm = async () => {
     try {
       let response = await fetch(`${urlBase}/api/products/${id}`);
 
+      let data = await response.json();
       if (!response.ok) {
         return mostrarMensaje("error", data.message);
       }
 
-      response = await response.json();
 
-      let arrProductos = response.payload;
+      let arrProductos = data.payload;
       renderizarProducto(arrProductos);
     } catch (error) {
       console.log("error envio user a la bd: ", error);
@@ -68,13 +68,13 @@ const eliminarProducto = async (id) => {
       method: "DELETE",
     });
 
+    let data = await response.json(); 
     if (!response.ok) {
-      return mostrarMensaje("error", result.message);
+      return mostrarMensaje("error", data.message);
     }
 
-    response = await response.json();
 
-    mostrarMensaje("exito", response.message);
+    mostrarMensaje("exito", data.message);
   } catch (error) {
     console.log("Error eliminacion producto: ", error);
   }

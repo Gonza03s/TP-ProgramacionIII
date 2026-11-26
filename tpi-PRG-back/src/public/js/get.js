@@ -13,11 +13,15 @@ const obtenerDatosForm = async () => {
     }
 
     try {
-      let resultado = await fetch(`${urlBase}/api/products/${id}`);
-      resultado = await resultado.json();
+      let response = await fetch(`${urlBase}/api/products/${id}`);
+      let data = await response.json();
 
-      const data = resultado.payload;
-      renderizarProducto(data);
+      // si el back respondio 400, 404 o 500, mostramos su mensaje y cortamos
+      if (!response.ok) {
+        return mostrarMensaje("error", data.message);
+      }
+
+      renderizarProducto(data.payload);
     } catch (error) {
       console.log("error al traer los datos: ", error);
     }
