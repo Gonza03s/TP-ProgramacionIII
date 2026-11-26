@@ -86,7 +86,7 @@ export const createProduct = async (req, res) => {
 
 export const modifyProduct = async (req, res) => {
   try {
-    const { id, category, image, name, price,active } = req.body;
+    const { id, category, image, name, price, active } = req.body;
 
     console.log("CONTROLLER MODIFY DATOS Q LLEGAN DESDE EL FRONT", req.body);
 
@@ -99,9 +99,16 @@ export const modifyProduct = async (req, res) => {
       id,
     );
 
-    if (rows.changedRows === 0) {
+    if (rows.affectedRows === 0) {
       return res.status(404).json({
-        message: `no se actualizo el producto`,
+        message: `No se encontro producto con id ${id}`,
+      });
+    }
+
+    // el producto existe pero los datos eran iguales
+    if (rows.changedRows === 0) {
+      return res.status(200).json({
+        message: `El producto con id ${id} no tuvo cambios`,
       });
     }
 
