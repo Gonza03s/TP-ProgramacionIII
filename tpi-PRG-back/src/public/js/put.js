@@ -63,6 +63,25 @@ const obtenerProducto = () => {
   });
 };
 
+const buscarProducto = async (id) => {
+  if (!id || id <= 0) {
+    return mostrarMensaje("error", "Ingresa un id valido");
+  }
+
+  try {
+    let response = await fetch(`${urlBase}/api/products/${id}`);
+    let data = await response.json();
+
+    if (!response.ok) {
+      return mostrarMensaje("error", data.message);
+    }
+
+    renderizarProducto(data.payload);
+  } catch (error) {
+    console.log("error al traer datos de la back: ", error);
+  }
+};
+
 const renderizarProducto = (arrProducto) => {
   let html = ``;
 
@@ -127,6 +146,11 @@ const mostrarFormActualizacion = async (producto) => {
         `;
 
   productContainer.innerHTML = html;
+  
+  //// si no se tocan los select al editar, se mantienen como estaban
+  document.getElementById("categoryProd").value = producto.category;
+  document.getElementById("activeProd").value = producto.active;
+
 
   let formPut = document.getElementById("form-put-act");
 
@@ -163,7 +187,7 @@ const actualizarProducto = async (event) => {
       body: dataJson,
     });
 
-    console.log("RESPUESTA Q LLEGA DESDE EL BACK PARA EL CLIENTE: ",response);
+    console.log("RESPUESTA Q LLEGA DESDE EL BACK PARA EL CLIENTE: ", response);
 
     let dataBackend = await response.json();
     if (!response.ok) {
@@ -171,7 +195,9 @@ const actualizarProducto = async (event) => {
     }
 
 
-    mostrarMensaje("exito", dataBackend.message);
+    //mostrarMensaje("exito", dataBackend.message);
+    alert(dataBackend.message);
+    window.location.href = "/dashboard/principal";
   } catch (error) {
     console.log("error al mandar al back", error);
   }
@@ -181,3 +207,7 @@ const actualizarProducto = async (event) => {
 
 obtenerProducto();
 
+const idInicial = Number(formulario.ProdId.value);
+if (idInicial) {
+  buscarProducto(idInicial);
+}

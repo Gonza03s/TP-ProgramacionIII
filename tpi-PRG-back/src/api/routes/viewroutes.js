@@ -13,7 +13,10 @@ const router = Router();
 router.get("/principal", requiredLogin, vistaProductos);
 router.get("/consultar", requiredLogin, vistaConsultar);
 router.get("/crear", requiredLogin, vistaCrear);
+
 router.get("/modificar", requiredLogin, vistaModificar);
+router.get("/modificar/:id", requiredLogin, vistaModificar);
+
 router.get("/eliminar", requiredLogin, vistaEliminar);
 
 export default router;

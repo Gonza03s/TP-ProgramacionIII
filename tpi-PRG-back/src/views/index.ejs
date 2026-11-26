@@ -36,7 +36,7 @@
             </div>
 
             <div class="card-acciones">
-              <a href="/dashboard/modificar" class="btn-enviar">Editar</a>
+              <a href="/dashboard/modificar/<%= prod.id %>" class="btn-enviar">Editar</a>
 
               <% if (prod.active) { %>
                 <button class="btn-enviar btn-desactivar" data-id="<%= prod.id %>">Desactivar</button>

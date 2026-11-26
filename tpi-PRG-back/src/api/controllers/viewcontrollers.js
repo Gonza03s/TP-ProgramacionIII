@@ -22,7 +22,9 @@ export const vistaCrear = (req, res) => {
 };
 
 export const vistaModificar = (req, res) => {
-  res.render("put", { title: "Modificar Producto" });
+  res.render("put", { 
+    title: "Modificar Producto",
+    id: req.params.id });
 };
 
 export const vistaEliminar = (req, res) => {
