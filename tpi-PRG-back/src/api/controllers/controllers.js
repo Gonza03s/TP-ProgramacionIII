@@ -121,14 +121,43 @@ export const removeProduct = async (req, res) => {
   try {
     const [rows] = await productModels.deleteProduct(req.id);
 
+
+    if (rows.affectedRows === 0) {
+      return res.status(404).json({
+        message: `No se encontro producto con id ${req.id}`,
+      });
+    }
+
     res.status(200).json({
-      message: `producto con id ${req.id} eliminado correctamente`,
+      message: `producto con id ${req.id} desactivado correctamente`,
     });
   } catch (error) {
-    console.log("error eliminado producto", error);
+    console.log("error desactivando producto", error);
 
     res.status(500).json({
-      message: "error interno del servidor al eliminar producto",
+      message: "error interno del servidor al desactivar producto",
+    });
+  }
+};
+
+export const activateProduct = async (req, res) => {
+  try {
+    const [rows] = await productModels.activateProduct(req.id);
+
+    if (rows.affectedRows === 0) {
+      return res.status(404).json({
+        message: `No se encontro producto con id ${req.id}`,
+      });
+    }
+
+    res.status(200).json({
+      message: `producto con id ${req.id} activado correctamente`,
+    });
+  } catch (error) {
+    console.log("error activando producto", error);
+
+    res.status(500).json({
+      message: "error interno del servidor al activar producto",
     });
   }
 };
