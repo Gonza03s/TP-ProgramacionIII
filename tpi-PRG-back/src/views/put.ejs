@@ -12,7 +12,7 @@
             <form id="form-put">
 
                 <label for="ProdId"></label>
-                <input class="input-style" type="number" name="ProdId" id="ProdId" placeholder="Ingrese ID del producto">
+                <input class="input-style" type="number" name="ProdId" id="ProdId" placeholder="Ingrese ID del producto" value="<%= typeof id !== 'undefined' ? id : '' %>">
 
                 <div class="submit-container">
                     <input class="btn-enviar" type="submit" value="Enviar"></input>

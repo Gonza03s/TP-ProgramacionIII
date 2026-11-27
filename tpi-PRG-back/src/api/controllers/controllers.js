@@ -30,7 +30,11 @@ export const getAllProducts = async (req, res) => {
       payload: rows,
     });
   } catch (error) {
-    console.log(error);
+    console.log("Error obteniendo todos los productos: ", error);
+
+    res.status(500).json({
+      message: "Error interno del servidor al obtener productos",
+    });
   }
 };
 
@@ -82,7 +86,7 @@ export const createProduct = async (req, res) => {
 
 export const modifyProduct = async (req, res) => {
   try {
-    const { id, category, image, name, price,active } = req.body;
+    const { id, category, image, name, price, active } = req.body;
 
     console.log("CONTROLLER MODIFY DATOS Q LLEGAN DESDE EL FRONT", req.body);
 
@@ -95,9 +99,16 @@ export const modifyProduct = async (req, res) => {
       id,
     );
 
-    if (rows.changedRows === 0) {
+    if (rows.affectedRows === 0) {
       return res.status(404).json({
-        message: `no se actualizo el producto`,
+        message: `No se encontro producto con id ${id}`,
+      });
+    }
+
+    // el producto existe pero los datos eran iguales
+    if (rows.changedRows === 0) {
+      return res.status(200).json({
+        message: `El producto con id ${id} no tuvo cambios`,
       });
     }
 
@@ -117,14 +128,43 @@ export const removeProduct = async (req, res) => {
   try {
     const [rows] = await productModels.deleteProduct(req.id);
 
+
+    if (rows.affectedRows === 0) {
+      return res.status(404).json({
+        message: `No se encontro producto con id ${req.id}`,
+      });
+    }
+
     res.status(200).json({
-      message: `producto con id ${req.id} eliminado correctamente`,
+      message: `producto con id ${req.id} desactivado correctamente`,
     });
   } catch (error) {
-    console.log("error eliminado producto", error);
+    console.log("error desactivando producto", error);
 
     res.status(500).json({
-      message: "error interno del servidor al eliminar producto",
+      message: "error interno del servidor al desactivar producto",
+    });
+  }
+};
+
+export const activateProduct = async (req, res) => {
+  try {
+    const [rows] = await productModels.activateProduct(req.id);
+
+    if (rows.affectedRows === 0) {
+      return res.status(404).json({
+        message: `No se encontro producto con id ${req.id}`,
+      });
+    }
+
+    res.status(200).json({
+      message: `producto con id ${req.id} activado correctamente`,
+    });
+  } catch (error) {
+    console.log("error activando producto", error);
+
+    res.status(500).json({
+      message: "error interno del servidor al activar producto",
     });
   }
 };

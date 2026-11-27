@@ -1,19 +1,18 @@
 import connection from "../database/db.js";
 
 const selectActiveProducts = () => {
-  const sql =
-    "SELECT id, name, price, image FROM products WHERE products.active = 1";
+  const sql = "SELECT id, name, price, image, category, active FROM products WHERE products.active = 1";
   return connection.query(sql);
 };
 
 const selectAllProducts = () => {
-  const sql = "SELECT id, name, price, image FROM products";
+  const sql = "SELECT id, name, price, image, category, active FROM products";
   return connection.query(sql);
 };
 
 const selectProductById = (id) => {
   const sql =
-    "SELECT id, name, price, image, active FROM products WHERE products.id = ?";
+    "SELECT id, name, price, image, category, active FROM products WHERE products.id = ?";
   return connection.query(sql, [id]);
 };
 
@@ -31,7 +30,11 @@ const updateProduct = (name, image, price, category, active, id) => {
 };
 
 const deleteProduct = (id) => {
-  const sql = "DELETE FROM products WHERE id = ?";
+  const sql = "UPDATE products SET active = 0 WHERE id = ?";
+  return connection.query(sql, [id]);
+};
+const activateProduct = (id) => {
+  const sql = "UPDATE products SET active = 1 WHERE id = ?";
   return connection.query(sql, [id]);
 };
 
@@ -42,4 +45,5 @@ export default {
   updateProduct,
   deleteProduct,
   selectActiveProducts,
+  activateProduct
 };

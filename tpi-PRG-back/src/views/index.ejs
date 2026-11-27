@@ -1,31 +1,60 @@
 <%- include("partials/head.ejs") %>
 <%- include("partials/header.ejs") %>
 
-    <main>
-      <section id="product-container">
+<main>
+  <section id="product-container">
 
-        <h1>Lista Productos</h1>
+    <div class="dashboard-titulo">
+      <h1>Lista Productos</h1>
+      <a href="/dashboard/crear" class="btn-enviar">+ Agregar producto</a>
+    </div>
 
-          <div class="product-list-container">
-            <% listaProductos.forEach(prod => { %>
-                <div class="card-producto">
+    <% const categorias = [
+         { valor: "medications", titulo: "Medicamentos" },
+         { valor: "sports supplements", titulo: "Suplementos deportivos" }
+       ]; %>
 
-                  <img class="img-product" src= "<%=prod.image%>" alt= "<%=prod.image%>"  >
+    <% categorias.forEach(cat => { %>
+      <h2><%= cat.titulo %></h2>
 
-                  <div class="card-text">
-                    <h4> <%= prod.name%>  </h4>
-                    <p>ID: <%=prod.id%></p>
-                    <p class="card-price">$ <%=prod.price%> </p>
-                  </div>
+      <div class="product-list-container">
+        <% listaProductos.filter(prod => prod.category === cat.valor).forEach(prod => { %>
 
-                </div>
+          <div class="card-producto <%= prod.active ? '' : 'card-inactiva' %>">
+            <img class="img-product" src="<%= prod.image %>" alt="<%= prod.name %>">
 
-              <% }) %>
+            <div class="card-text">
+              <h4><%= prod.name %></h4>
+              <p>ID: <%= prod.id %></p>
+              <p class="card-price">$ <%= prod.price %></p>
+
+              <% if (prod.active) { %>
+                <p class="estado estado-activo">● Activo</p>
+              <% } else { %>
+                <p class="estado estado-inactivo">● Inactivo</p>
+              <% } %>
+            </div>
+
+            <div class="card-acciones">
+              <a href="/dashboard/modificar/<%= prod.id %>" class="btn-enviar">Editar</a>
+
+              <% if (prod.active) { %>
+                <button class="btn-enviar btn-desactivar" data-id="<%= prod.id %>">Desactivar</button>
+              <% } else { %>
+                <button class="btn-enviar btn-activar" data-id="<%= prod.id %>">Activar</button>
+              <% } %>
+            </div>
           </div>
 
-        </section>
-    </main>
-    
+        <% }) %>
+      </div>
+    <% }) %>
+
+  </section>
+</main>
+
+<script src="/js/dashboard.js"></script>
+
   </body>
 
 

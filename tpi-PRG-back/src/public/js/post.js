@@ -24,12 +24,12 @@ function validarFormulario(data) {
 function mostrarListaErrores(array) {
   let htmlErrores = "";
 
-  array.foreach((error) => {
+  array.forEach((error) => {
     htmlErrores += `
                     <p class= "mensaje error}">${error}</p>
                 `;
   });
-  contenedorProductos.innerHTML = htmlErrores;
+  productContainer.innerHTML = htmlErrores;
 }
 
 function mostrarMensaje(estado, mensaje) {
@@ -70,7 +70,9 @@ const obtenerDatosForm = () => {
         return mostrarMensaje("error", data.message);
       }
 
-      mostrarMensaje("exito", mensajeCompleto);
+      // volver al dashboard
+      alert(mensajeCompleto);
+      window.location.href = "/dashboard/principal";
     } catch (error) {
       return mostrarMensaje("error", "error al enviar los datos");
     }

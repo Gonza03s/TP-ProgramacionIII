@@ -33,7 +33,7 @@ const validateProducts= (req,res,next)=>{
     }
 
     if(errors.length > 0){
-        res.status(400).json({
+        return res.status(400).json({
             message:"datos invalidos",
             listaErrores: errors
         })

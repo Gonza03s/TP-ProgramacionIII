@@ -24,7 +24,7 @@ function validarFormulario(data) {
 function mostrarListaErrores(array) {
   let htmlErrores = "";
 
-  array.foreach((error) => {
+  array.forEach((error) => {
     htmlErrores += `
                     <p class= "mensaje error}">${error}</p>
                 `;
@@ -61,6 +61,25 @@ const obtenerProducto = () => {
       console.log("error al traer datos de la back: ", error);
     }
   });
+};
+
+const buscarProducto = async (id) => {
+  if (!id || id <= 0) {
+    return mostrarMensaje("error", "Ingresa un id valido");
+  }
+
+  try {
+    let response = await fetch(`${urlBase}/api/products/${id}`);
+    let data = await response.json();
+
+    if (!response.ok) {
+      return mostrarMensaje("error", data.message);
+    }
+
+    renderizarProducto(data.payload);
+  } catch (error) {
+    console.log("error al traer datos de la back: ", error);
+  }
 };
 
 const renderizarProducto = (arrProducto) => {
@@ -110,7 +129,7 @@ const mostrarFormActualizacion = async (producto) => {
             <input class="input-style" value=${producto.image} type="text" name="image" id="image-prod" required>
 
             <label for="name-prod">Nombre</label>
-            <input class="input-style" value=${producto.name} type="text" name="name" id="name-prod" required>
+            <input class="input-style" value="${producto.name}" type="text" name="name" id="name-prod" required>
         
             <label for="price-prod">Precio</label>
             <input class="input-style" value=${producto.price} type="number" name="price" id="price-prod" required>
@@ -127,6 +146,11 @@ const mostrarFormActualizacion = async (producto) => {
         `;
 
   productContainer.innerHTML = html;
+  
+  //// si no se tocan los select al editar, se mantienen como estaban
+  document.getElementById("categoryProd").value = producto.category;
+  document.getElementById("activeProd").value = producto.active;
+
 
   let formPut = document.getElementById("form-put-act");
 
@@ -163,15 +187,17 @@ const actualizarProducto = async (event) => {
       body: dataJson,
     });
 
-    console.log("RESPUESTA Q LLEGA DESDE EL BACK PARA EL CLIENTE: ",response);
-
-    if (!response.ok) {
-      return mostrarMensaje("error", resultadoServer.message);
-    }
+    console.log("RESPUESTA Q LLEGA DESDE EL BACK PARA EL CLIENTE: ", response);
 
     let dataBackend = await response.json();
+    if (!response.ok) {
+      return mostrarMensaje("error", dataBackend.message);
+    }
 
-    mostrarMensaje("exito", dataBackend.message);
+
+    //mostrarMensaje("exito", dataBackend.message);
+    alert(dataBackend.message);
+    window.location.href = "/dashboard/principal";
   } catch (error) {
     console.log("error al mandar al back", error);
   }
@@ -181,3 +207,7 @@ const actualizarProducto = async (event) => {
 
 obtenerProducto();
 
+const idInicial = Number(formulario.ProdId.value);
+if (idInicial) {
+  buscarProducto(idInicial);
+}
